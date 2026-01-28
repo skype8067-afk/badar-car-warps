@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CLIENTS } from '../constants';
+import { CLIENTS } from '../constants.tsx';
 
 const Clients: React.FC = () => {
   return (

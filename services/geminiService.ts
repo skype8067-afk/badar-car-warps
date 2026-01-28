@@ -1,9 +1,26 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+const getApiKey = () => {
+  try {
+    // Standard approach for browser environments that might not have process.env shimmed
+    if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
+      return process.env.API_KEY;
+    }
+  } catch (e) {
+    console.warn("API Key environment variable not accessible.");
+  }
+  return '';
+};
+
+const getAI = () => new GoogleGenAI({ apiKey: getApiKey() });
 
 export const generateDesignBrief = async (userVision: string) => {
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    return "The AI consultant is currently unavailable. Please contact Badar directly at hello@badar.design.";
+  }
+
   const ai = getAI();
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',

@@ -1,5 +1,5 @@
 
-import { Service, WorkItem, Feedback } from './types';
+import { Service, WorkItem, Feedback } from './types.ts';
 
 export const SERVICES: Service[] = [
   {

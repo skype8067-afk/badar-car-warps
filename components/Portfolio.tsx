@@ -1,7 +1,7 @@
 
 import React, { useState, memo } from 'react';
-import { PORTFOLIO } from '../constants';
-import { WorkItem } from '../types';
+import { PORTFOLIO } from '../constants.tsx';
+import { WorkItem } from '../types.ts';
 import { Play, Grid, ArrowRight, X } from 'lucide-react';
 
 const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLightbox: (url: string) => void }) => {

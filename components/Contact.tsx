@@ -14,7 +14,7 @@ const Contact: React.FC = () => {
 
   // Video ID: 1159091703
   const videoId = '1159091703';
-  const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&quality=1080p&dnt=1`;
+  const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&playsinline=1&dnt=1`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -25,29 +25,18 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    /**
-     * The NEW Google Web App URL provided by the user.
-     * Ensure your Google Script is deployed with:
-     * 1. Execute as: Me
-     * 2. Who has access: Anyone
-     */
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwo1ums9xPcTHip0ixRHKAZe4sdwDUqV3Bf-L_Ruwv0QLmdcbqQxiDIZsaYAhbG-C5qbg/exec';
 
     try {
-      // Using URLSearchParams is the most robust way to send data to Google Script 'doPost'
-      // when using 'no-cors' mode from a browser. This avoids pre-flight (OPTIONS) requests
-      // which Google Scripts do not support.
       const params = new URLSearchParams();
       params.append('fullName', formData.fullName);
       params.append('email', formData.email);
       params.append('service', formData.service);
       params.append('description', formData.description);
 
-      // We use 'no-cors' mode because Google Apps Script redirects after POST, 
-      // which browsers block under standard CORS rules.
       await fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Opaque request: we send but don't read the response
+        mode: 'no-cors',
         cache: 'no-cache',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -55,11 +44,8 @@ const Contact: React.FC = () => {
         body: params.toString(),
       });
 
-      // Since 'no-cors' doesn't let us see the success response, we assume success 
-      // if no network error occurred. 
       setSubmitted(true);
       
-      // Reset form after a brief period
       setTimeout(() => {
         setSubmitted(false);
         setFormData({ 
@@ -88,13 +74,14 @@ const Contact: React.FC = () => {
         <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center">
           <iframe
             src={embedUrl}
+            loading="eager"
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 contrast-110"
             style={{
               width: '100vw',
               height: '56.25vw',
               minHeight: '100vh',
               minWidth: '177.77vh',
-              transform: 'translate(-50%, -50%) scale(1.1)', 
+              transform: 'translate(-50%, -50%) scale(1.05)', 
               border: 'none'
             }}
             allow="autoplay; fullscreen"

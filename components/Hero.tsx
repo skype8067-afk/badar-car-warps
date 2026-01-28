@@ -3,7 +3,9 @@ import React from 'react';
 
 const Hero: React.FC = () => {
   const videoId = '1159068755';
-  const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&quality=1080p&dnt=1`;
+  // Removed &quality=1080p to allow adaptive bitrate for faster initial start
+  // Added &playsinline=1 and ensured background=1 is present
+  const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&playsinline=1&dnt=1`;
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -21,16 +23,17 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center">
           <iframe
             src={embedUrl}
+            loading="eager"
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-80 contrast-110 pointer-events-none"
             style={{
               width: '100vw',
               height: '56.25vw',
               minHeight: '100vh',
               minWidth: '177.77vh',
-              transform: 'translate(-50%, -50%) scale(1.1)', 
+              transform: 'translate(-50%, -50%) scale(1.05)', 
               border: 'none'
             }}
-            allow="autoplay; fullscreen; picture-in-picture"
+            allow="autoplay; fullscreen"
             title="Badar Brand Showcase"
           ></iframe>
         </div>

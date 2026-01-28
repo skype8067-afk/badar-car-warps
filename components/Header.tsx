@@ -23,6 +23,18 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     }
   };
 
+  const handleEnquire = () => {
+    // Attempt to open Tawk.to chat if available, otherwise scroll to contact
+    if ((window as any).Tawk_API && (window as any).Tawk_API.maximize) {
+      (window as any).Tawk_API.maximize();
+    } else {
+      const element = document.getElementById('contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -72,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           </button>
           
           <button 
-            onClick={() => scrollToSection('contact')}
+            onClick={handleEnquire}
             className="bg-white text-black px-6 py-2 text-sm font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors"
           >
             Enquire

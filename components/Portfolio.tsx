@@ -1,10 +1,22 @@
 
-import { useState, memo } from 'react';
+import React, { useState, memo } from 'react';
 import { PORTFOLIO } from '../constants.tsx';
 import { WorkItem } from '../types.ts';
 import { Play, Grid, ArrowRight, X } from 'lucide-react';
 
 const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLightbox: (url: string) => void }) => {
+  // Fix: Added React import to resolve the 'React' namespace error
+  const handleEnquire = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if ((window as any).Tawk_API && (window as any).Tawk_API.maximize) {
+      (window as any).Tawk_API.maximize();
+    } else {
+      const contact = document.getElementById('contact');
+      if (contact) contact.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div 
       className={`group relative overflow-hidden bg-zinc-950 border border-zinc-900 transition-all duration-700 hover:border-zinc-700 ${
@@ -88,10 +100,7 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
         </div>
         
         <button 
-          onClick={(e) => {
-            const contact = document.getElementById('contact');
-            if (contact) contact.scrollIntoView({ behavior: 'smooth' });
-          }}
+          onClick={handleEnquire}
           className="hidden md:flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-zinc-500 group-hover:text-white transition-all duration-300 pointer-events-auto"
         >
           Enquire Project

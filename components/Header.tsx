@@ -47,9 +47,12 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
       <div className="container mx-auto px-6 flex items-center justify-between pointer-events-auto">
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="text-2xl font-serif font-black tracking-tighter hover:text-zinc-300 transition-colors"
+          className="flex items-center gap-4 text-2xl font-serif font-black tracking-tighter hover:text-zinc-300 transition-colors group"
         >
-          BADAR<span className="text-zinc-600">.</span>
+          <span className="flex items-end">
+            BADAR
+            <span className="w-1.5 h-1.5 bg-zinc-600 ml-1 mb-1.5"></span>
+          </span>
         </button>
         
         <nav className="hidden lg:flex items-center space-x-10 text-sm font-medium tracking-widest uppercase">

@@ -1,5 +1,5 @@
 
-import React, { useState, memo } from 'react';
+import { useState, memo } from 'react';
 import { PORTFOLIO } from '../constants.tsx';
 import { WorkItem } from '../types.ts';
 import { Play, Grid, ArrowRight, X } from 'lucide-react';
@@ -36,7 +36,7 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 p-3 h-full min-h-[700px] bg-black">
            {/* Main Showcase Frame */}
            <div 
-             className="col-span-2 row-span-2 lg:col-span-3 lg:row-span-2 relative overflow-hidden group/img border border-zinc-900 cursor-pointer"
+             className="col-span-2 row-span-2 lg:col-span-3 lg:row-span-2 relative overflow-hidden group/img border border-zinc-900 cursor-zoom-in"
              onClick={() => onOpenLightbox(item.collageImages![0])}
            >
               <img src={item.collageImages[0]} className="w-full h-full object-cover transition-all duration-1000 scale-100 group-hover/img:scale-110" alt="Main Showcase" />
@@ -47,7 +47,7 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
            {item.collageImages.slice(1).map((imgUrl, idx) => (
              <div 
                key={idx} 
-               className={`relative overflow-hidden group/img border border-zinc-900 aspect-square lg:aspect-auto cursor-pointer ${
+               className={`relative overflow-hidden group/img border border-zinc-900 aspect-square lg:aspect-auto cursor-zoom-in ${
                  idx === 2 ? 'col-span-1 md:col-span-2' : idx === 5 ? 'md:col-span-2 lg:col-span-1' : ''
                }`}
                onClick={() => onOpenLightbox(imgUrl)}
@@ -60,7 +60,7 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
         <img 
           src={item.image} 
           alt={item.title} 
-          className="w-full h-full object-cover transition-all duration-1000 cursor-pointer"
+          className="w-full h-full object-cover transition-all duration-1000 cursor-zoom-in"
           onClick={() => onOpenLightbox(item.image)}
         />
       )}
@@ -89,7 +89,6 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
         
         <button 
           onClick={(e) => {
-            e.preventDefault();
             const contact = document.getElementById('contact');
             if (contact) contact.scrollIntoView({ behavior: 'smooth' });
           }}
@@ -103,7 +102,7 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
   );
 });
 
-const Portfolio: React.FC = () => {
+const Portfolio = () => {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   const openLightbox = (url: string) => {
@@ -128,7 +127,6 @@ const Portfolio: React.FC = () => {
             </p>
           </div>
           <button 
-            onClick={(e) => e.preventDefault()}
             className="text-sm font-bold uppercase tracking-widest border-b-2 border-white pb-2 hover:text-zinc-400 hover:border-zinc-400 transition-all cursor-default"
           >
             Full Portfolio
@@ -142,22 +140,24 @@ const Portfolio: React.FC = () => {
         </div>
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal - Optimized for "Full" uncropped view */}
       {lightboxImage && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-12 cursor-zoom-out animate-in fade-in duration-300"
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-8 cursor-zoom-out animate-in fade-in duration-300"
           onClick={closeLightbox}
         >
           <button 
-            className="absolute top-8 right-8 text-white hover:text-zinc-400 transition-colors bg-zinc-900/50 p-3 rounded-full"
+            className="absolute top-8 right-8 text-white hover:text-zinc-400 transition-colors bg-zinc-900/50 p-3 rounded-full z-[110]"
             onClick={closeLightbox}
           >
             <X size={32} />
           </button>
+          
           <img 
             src={lightboxImage} 
-            alt="Expanded view" 
-            className="max-w-full max-h-full object-contain shadow-2xl"
+            alt="Expanded full view" 
+            className="max-w-[95vw] max-h-[90vh] object-contain shadow-[0_0_100px_rgba(0,0,0,0.5)] rounded-sm"
+            style={{ imageRendering: 'auto' }}
           />
         </div>
       )}

@@ -61,29 +61,29 @@ export const SERVICES: Service[] = [
 export const PORTFOLIO: WorkItem[] = [
   { 
     id: 1, 
-    title: 'Matte Black SUV Wrap', 
+    title: 'Food Truck Vehicle Wrap Design', 
     category: 'Vehicle Wrap', 
     image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800',
     vimeoId: '1159071726' 
   },
   { 
     id: 4, 
-    title: 'Luxury Skincare Packaging', 
-    category: 'Packaging', 
-    image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=800',
+    title: 'Visual Identity on Wheels', 
+    category: 'Vehicle Branding', 
+    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',
     vimeoId: '1159074526'
   },
   { 
     id: 3, 
-    title: 'Downtown Bistro Signage', 
-    category: 'Storefront', 
+    title: 'Food Truck Branding & Design', 
+    category: 'Branding & Design', 
     image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800',
     vimeoId: '1159073763'
   },
   { 
     id: 2, 
-    title: 'E-commerce Brand Identity', 
-    category: 'Branding', 
+    title: 'WoodyFix Rolling Brand Experience', 
+    category: 'Mobile Branding', 
     image: 'https://images.unsplash.com/photo-1541462608143-67571c6738dd?auto=format&fit=crop&q=80&w=800',
     vimeoId: '1159073251'
   },
@@ -91,9 +91,8 @@ export const PORTFOLIO: WorkItem[] = [
     id: 5,
     title: 'Signature Collection',
     category: 'Fleet & Custom Wraps',
-    image: 'https://i.postimg.cc/MTvVqB6m/image.jpg',
+    image: 'https://i.postimg.cc/v1NhyTTj/image.jpg',
     collageImages: [
-      'https://i.postimg.cc/MTvVqB6m/image.jpg',
       'https://i.postimg.cc/v1NhyTTj/image.jpg',
       'https://i.postimg.cc/qh6Lvr6w/image.jpg',
       'https://i.postimg.cc/S2Yrx4YT/image.jpg',

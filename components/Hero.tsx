@@ -2,9 +2,8 @@
 import React from 'react';
 
 const Hero: React.FC = () => {
+  // Using the requested Vimeo link ID for the background
   const videoId = '1159068755';
-  // Removed &quality=1080p to allow adaptive bitrate for faster initial start
-  // Added &playsinline=1 and ensured background=1 is present
   const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&playsinline=1&dnt=1`;
 
   const scrollToSection = (id: string) => {
@@ -17,24 +16,25 @@ const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-black">
       <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Overlays to ensure text stays sharp and readable */}
         <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black z-10"></div>
         
+        {/* Vimeo Video Layer - Standard Background Embed */}
         <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center">
           <iframe
             src={embedUrl}
-            loading="eager"
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-80 contrast-110 pointer-events-none"
             style={{
               width: '100vw',
-              height: '56.25vw',
+              height: '56.25vw', // 16:9 Aspect Ratio
               minHeight: '100vh',
-              minWidth: '177.77vh',
-              transform: 'translate(-50%, -50%) scale(1.05)', 
+              minWidth: '177.77vh', // Ensure coverage on all screens
+              transform: 'translate(-50%, -50%) scale(1.1)', // Slight scale to hide edge artifacts
               border: 'none'
             }}
             allow="autoplay; fullscreen"
-            title="Badar Brand Showcase"
+            title="Badar Hero Background"
           ></iframe>
         </div>
       </div>
@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
           <p className="text-white font-medium tracking-[0.3em] uppercase mb-6 drop-shadow-lg">
             Premium Creative Agency • Established 2015
           </p>
-          <h1 className="text-6xl md:text-8xl font-serif font-black leading-tight mb-8 drop-shadow-2xl">
+          <h1 className="text-6xl md:text-8xl font-serif font-black leading-tight mb-8 drop-shadow-2xl text-white">
             Precision Design. <br />
             <span className="text-zinc-400">Flawless Finish.</span>
           </h1>

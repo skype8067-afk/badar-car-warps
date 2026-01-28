@@ -12,7 +12,7 @@ const Contact: React.FC = () => {
     description: ''
   });
 
-  // Video ID: 1159091703
+  // Using the specific Vimeo ID provided by the user
   const videoId = '1159091703';
   const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&playsinline=1&dnt=1`;
 
@@ -66,26 +66,26 @@ const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="relative py-32 overflow-hidden min-h-[900px] flex items-center bg-black">
-      {/* Background Video Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
+        {/* Overlays to ensure text stays sharp and readable */}
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-10"></div>
         
+        {/* Vimeo Video Layer */}
         <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center">
           <iframe
             src={embedUrl}
-            loading="eager"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 contrast-110"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 contrast-125 pointer-events-none"
             style={{
               width: '100vw',
-              height: '56.25vw',
+              height: '56.25vw', // 16:9 Aspect Ratio
               minHeight: '100vh',
               minWidth: '177.77vh',
-              transform: 'translate(-50%, -50%) scale(1.05)', 
+              transform: 'translate(-50%, -50%) scale(1.2)',
               border: 'none'
             }}
             allow="autoplay; fullscreen"
-            title="Contact Background"
+            title="Badar Contact Background"
           ></iframe>
         </div>
       </div>
@@ -167,7 +167,7 @@ const Contact: React.FC = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-serif font-black">Project Enquiry</h3>
+                  <h3 className="text-2xl font-serif font-black text-white">Project Enquiry</h3>
                   <p className="text-zinc-400 text-sm">Tell us about your brand vision and surface requirements.</p>
                 </div>
 

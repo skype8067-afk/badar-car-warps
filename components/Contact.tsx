@@ -1,26 +1,87 @@
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter, Check, Loader2 } from 'lucide-react';
 
 const Contact: React.FC = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    service: 'Vehicle & Car Wraps',
+    description: ''
+  });
 
-  // Video ID provided by user: 1159091703
+  // Video ID: 1159091703
   const videoId = '1159091703';
   const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&quality=1080p&dnt=1`;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    // Mimic API delay and reset
-    setTimeout(() => setSubmitted(false), 5000);
+    setIsSubmitting(true);
+
+    /**
+     * The NEW Google Web App URL provided by the user.
+     * Ensure your Google Script is deployed with:
+     * 1. Execute as: Me
+     * 2. Who has access: Anyone
+     */
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwo1ums9xPcTHip0ixRHKAZe4sdwDUqV3Bf-L_Ruwv0QLmdcbqQxiDIZsaYAhbG-C5qbg/exec';
+
+    try {
+      // Using URLSearchParams is the most robust way to send data to Google Script 'doPost'
+      // when using 'no-cors' mode from a browser. This avoids pre-flight (OPTIONS) requests
+      // which Google Scripts do not support.
+      const params = new URLSearchParams();
+      params.append('fullName', formData.fullName);
+      params.append('email', formData.email);
+      params.append('service', formData.service);
+      params.append('description', formData.description);
+
+      // We use 'no-cors' mode because Google Apps Script redirects after POST, 
+      // which browsers block under standard CORS rules.
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Opaque request: we send but don't read the response
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString(),
+      });
+
+      // Since 'no-cors' doesn't let us see the success response, we assume success 
+      // if no network error occurred. 
+      setSubmitted(true);
+      
+      // Reset form after a brief period
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({ 
+          fullName: '', 
+          email: '', 
+          service: 'Vehicle & Car Wraps', 
+          description: '' 
+        });
+      }, 5000);
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('There was a connection error. Please try again or email hello@badar.design directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section id="contact" className="relative py-32 overflow-hidden min-h-[900px] flex items-center bg-black">
-      {/* Cinematic Background Video Layer */}
+      {/* Background Video Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Adjusted overlay from bg-black/70 to bg-black/40 for better video visibility */}
         <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-10"></div>
         
@@ -36,8 +97,8 @@ const Contact: React.FC = () => {
               transform: 'translate(-50%, -50%) scale(1.1)', 
               border: 'none'
             }}
-            allow="autoplay; fullscreen; picture-in-picture"
-            title="Contact Background Visual"
+            allow="autoplay; fullscreen"
+            title="Contact Background"
           ></iframe>
         </div>
       </div>
@@ -59,8 +120,8 @@ const Contact: React.FC = () => {
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2 drop-shadow-md">Our Studio Location</h4>
-                  <p className="text-white text-lg font-medium leading-relaxed drop-shadow-md">
+                  <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2">Our Studio Location</h4>
+                  <p className="text-white text-lg font-medium leading-relaxed">
                     123 Design District, Suite 500<br />
                     Creative Hub, NY 10013
                   </p>
@@ -72,8 +133,8 @@ const Contact: React.FC = () => {
                   <Mail size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2 drop-shadow-md">Email Our Team</h4>
-                  <p className="text-white text-2xl font-serif font-bold italic underline decoration-zinc-700 hover:decoration-white transition-all cursor-pointer drop-shadow-md">
+                  <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2">Email Our Team</h4>
+                  <p className="text-white text-2xl font-serif font-bold italic underline decoration-zinc-700 hover:decoration-white transition-all cursor-pointer">
                     hello@badar.design
                   </p>
                 </div>
@@ -84,8 +145,8 @@ const Contact: React.FC = () => {
                   <Phone size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2 drop-shadow-md">Call Directly</h4>
-                  <p className="text-white text-2xl font-serif font-bold drop-shadow-md">+1 (555) 0123-4567</p>
+                  <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2">Call Directly</h4>
+                  <p className="text-white text-2xl font-serif font-bold">+1 (555) 0123-4567</p>
                 </div>
               </div>
             </div>
@@ -93,20 +154,13 @@ const Contact: React.FC = () => {
             <div className="mt-16 pt-16 border-t border-white/20">
               <h4 className="font-bold uppercase tracking-widest text-[10px] text-zinc-500 mb-6">Join our digital ecosystem</h4>
               <div className="flex gap-4">
-                {[
-                  { icon: Instagram, url: 'https://instagram.com' },
-                  { icon: Linkedin, url: 'https://linkedin.com' },
-                  { icon: Twitter, url: 'https://twitter.com' }
-                ].map((social, i) => (
-                  <a 
+                {[Instagram, Linkedin, Twitter].map((Icon, i) => (
+                  <button 
                     key={i}
-                    href={social.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
                     className="p-4 bg-white/10 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-500 backdrop-blur-md"
                   >
-                    <social.icon size={18} />
-                  </a>
+                    <Icon size={18} />
+                  </button>
                 ))}
               </div>
             </div>
@@ -135,6 +189,9 @@ const Contact: React.FC = () => {
                     <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Full Name</label>
                     <input 
                       required 
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
                       type="text" 
                       className="bg-transparent border-b border-white/30 py-3 text-white focus:outline-none focus:border-white transition-colors placeholder:text-zinc-700" 
                       placeholder="Enter your full name" 
@@ -144,6 +201,9 @@ const Contact: React.FC = () => {
                     <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Email Address</label>
                     <input 
                       required 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       type="email" 
                       className="bg-transparent border-b border-white/30 py-3 text-white focus:outline-none focus:border-white transition-colors placeholder:text-zinc-700" 
                       placeholder="email@example.com" 
@@ -153,7 +213,12 @@ const Contact: React.FC = () => {
                 
                 <div className="flex flex-col gap-3">
                   <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Services Needed</label>
-                  <select className="bg-transparent border-b border-white/30 py-3 text-white focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer">
+                  <select 
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    className="bg-transparent border-b border-white/30 py-3 text-white focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer"
+                  >
                     <option className="bg-zinc-900 text-white">Vehicle & Car Wraps</option>
                     <option className="bg-zinc-900 text-white">Storefront Signage & Shop Graphics</option>
                     <option className="bg-zinc-900 text-white">Brand Identity & Logo Design</option>
@@ -166,16 +231,27 @@ const Contact: React.FC = () => {
                   <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Project Description & Vision</label>
                   <textarea 
                     required 
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
                     className="bg-transparent border-b border-white/30 py-3 text-white focus:outline-none focus:border-white transition-colors min-h-[140px] resize-none placeholder:text-zinc-700" 
-                    placeholder="Describe your project vision, goals, and any specific requirements..."
+                    placeholder="Describe your project vision..."
                   ></textarea>
                 </div>
 
                 <button 
                   type="submit" 
-                  className="w-full py-6 bg-white text-black font-black uppercase tracking-[0.2em] text-sm hover:bg-zinc-200 transition-all transform active:scale-95 shadow-xl shadow-white/5"
+                  disabled={isSubmitting}
+                  className="w-full py-6 bg-white text-black font-black uppercase tracking-[0.2em] text-sm hover:bg-zinc-200 transition-all transform active:scale-95 shadow-xl shadow-white/5 disabled:bg-zinc-500 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
-                  Submit Project Brief
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={20} className="animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    'Submit Project Brief'
+                  )}
                 </button>
               </form>
             )}

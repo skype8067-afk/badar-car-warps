@@ -5,7 +5,7 @@ import Hero from './components/Hero';
 import Clients from './components/Clients';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
-import AIConsultant from './components/AIConsultant';
+import Reviews from './components/Reviews';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { Star } from 'lucide-react';
@@ -40,15 +40,15 @@ const App: React.FC = () => {
               <div className="space-y-4">
                 <div className="flex justify-center gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} fill="white" className="text-white" />
+                    <Star key={i} size={18} fill="#FACC15" className="text-yellow-400" />
                   ))}
                 </div>
-                <h3 className="text-4xl font-black mb-2">5.0/5</h3>
-                <p className="text-zinc-500 uppercase tracking-widest text-xs font-bold">Client Rating</p>
+                <h3 className="text-4xl font-black mb-2">5.0</h3>
+                <p className="text-zinc-500 uppercase tracking-widest text-xs font-bold">Google Rating</p>
               </div>
               <div className="space-y-2">
-                <h3 className="text-5xl font-black mb-2">100%</h3>
-                <p className="text-zinc-500 uppercase tracking-widest text-xs font-bold">Recommendation Rate</p>
+                <h3 className="text-5xl font-black mb-2">125+</h3>
+                <p className="text-zinc-500 uppercase tracking-widest text-xs font-bold">Verified Reviews</p>
               </div>
               <div className="space-y-2">
                 <h3 className="text-5xl font-black mb-2">1.2k+</h3>
@@ -58,7 +58,7 @@ const App: React.FC = () => {
             
             <div className="mt-16 text-center">
               <p className="text-zinc-400 text-sm tracking-widest uppercase font-medium">
-                "Consistently recommended by top-tier brands for precision and reliability."
+                "Consistently the highest-rated agency in the region for precision branding and wraps."
               </p>
             </div>
           </div>
@@ -66,7 +66,7 @@ const App: React.FC = () => {
 
         <Services />
         <Portfolio />
-        <AIConsultant />
+        <Reviews />
         <Contact />
       </main>
       <Footer />

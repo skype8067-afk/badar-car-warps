@@ -15,6 +15,7 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
         /* High-impact Video Showcase Frame */
         <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
           <iframe
+            key={item.vimeoId}
             src={`https://player.vimeo.com/video/${item.vimeoId}?muted=1&autoplay=1&loop=1&background=1&autopause=0&playsinline=1&api=1&dnt=1&quality=1080p`}
             className="absolute w-full h-full border-none pointer-events-none"
             style={{
@@ -86,10 +87,17 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
           <h3 className="text-5xl md:text-7xl font-serif font-black tracking-tighter leading-none mb-2">{item.title}</h3>
         </div>
         
-        <div className="hidden md:flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-zinc-500 group-hover:text-white transition-all duration-300">
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            const contact = document.getElementById('contact');
+            if (contact) contact.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="hidden md:flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-zinc-500 group-hover:text-white transition-all duration-300 pointer-events-auto"
+        >
           Enquire Project
           <ArrowRight size={20} className="transform group-hover:translate-x-3 transition-transform" />
-        </div>
+        </button>
       </div>
     </div>
   );
@@ -119,9 +127,12 @@ const Portfolio: React.FC = () => {
               Behold the Badar standard.
             </p>
           </div>
-          <a href="#" className="text-sm font-bold uppercase tracking-widest border-b-2 border-white pb-2 hover:text-zinc-400 hover:border-zinc-400 transition-all">
+          <button 
+            onClick={(e) => e.preventDefault()}
+            className="text-sm font-bold uppercase tracking-widest border-b-2 border-white pb-2 hover:text-zinc-400 hover:border-zinc-400 transition-all cursor-default"
+          >
             Full Portfolio
-          </a>
+          </button>
         </div>
 
         <div className="flex flex-col gap-16">

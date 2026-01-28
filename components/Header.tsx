@@ -23,6 +23,13 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     }
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useEffect(() => {
     const handleFsChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
@@ -38,15 +45,18 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between pointer-events-auto">
-        <a href="#" className="text-2xl font-serif font-black tracking-tighter hover:text-zinc-300 transition-colors">
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="text-2xl font-serif font-black tracking-tighter hover:text-zinc-300 transition-colors"
+        >
           BADAR<span className="text-zinc-600">.</span>
-        </a>
+        </button>
         
         <nav className="hidden lg:flex items-center space-x-10 text-sm font-medium tracking-widest uppercase">
-          <a href="#services" className="hover:text-zinc-400 transition-colors">Services</a>
-          <a href="#portfolio" className="hover:text-zinc-400 transition-colors">Work</a>
-          <a href="#consultant" className="hover:text-zinc-400 transition-colors">AI Brief</a>
-          <a href="#contact" className="hover:text-zinc-400 transition-colors">Contact</a>
+          <button onClick={() => scrollToSection('services')} className="hover:text-zinc-400 transition-colors">Services</button>
+          <button onClick={() => scrollToSection('portfolio')} className="hover:text-zinc-400 transition-colors">Work</button>
+          <button onClick={() => scrollToSection('reviews')} className="hover:text-zinc-400 transition-colors">Reviews</button>
+          <button onClick={() => scrollToSection('contact')} className="hover:text-zinc-400 transition-colors">Contact</button>
         </nav>
 
         <div className="flex items-center gap-4">
@@ -58,12 +68,12 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
           </button>
           
-          <a 
-            href="#contact" 
+          <button 
+            onClick={() => scrollToSection('contact')}
             className="bg-white text-black px-6 py-2 text-sm font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors"
           >
             Enquire
-          </a>
+          </button>
         </div>
       </div>
     </header>

@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
 
     } catch (error) {
       console.error('Submission error:', error);
-      alert('There was a connection error. Please try again or email hello@badar.design directly.');
+      alert('There was a connection error. Please try again or email info@badarai.site directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -122,7 +122,7 @@ const Contact: React.FC = () => {
                 <div>
                   <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2">Email Our Team</h4>
                   <p className="text-white text-2xl font-serif font-bold italic underline decoration-zinc-700 hover:decoration-white transition-all cursor-pointer">
-                    hello@badar.design
+                    info@badarai.site
                   </p>
                 </div>
               </div>

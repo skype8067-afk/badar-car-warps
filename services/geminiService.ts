@@ -18,7 +18,7 @@ const getAI = () => new GoogleGenAI({ apiKey: getApiKey() });
 export const generateDesignBrief = async (userVision: string) => {
   const apiKey = getApiKey();
   if (!apiKey) {
-    return "The AI consultant is currently unavailable. Please contact Badar directly at hello@badar.design.";
+    return "The AI consultant is currently unavailable. Please contact Badar directly at info@badarai.site.";
   }
 
   const ai = getAI();

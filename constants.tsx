@@ -83,6 +83,13 @@ export const PORTFOLIO: WorkItem[] = [
     vimeoId: '1159071726' 
   },
   { 
+    id: 2, 
+    title: 'Woodfix Rolling Brand Experience', 
+    category: 'Vehicle Branding', 
+    image: 'https://images.unsplash.com/photo-1599256621730-535171e28e50?auto=format&fit=crop&q=80&w=800',
+    vimeoId: '1159073251' 
+  },
+  { 
     id: 4, 
     title: 'Visual Identity on Wheels', 
     category: 'Vehicle Branding', 

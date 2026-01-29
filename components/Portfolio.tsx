@@ -103,7 +103,9 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
               {item.category}
             </span>
           </div>
-          <h3 className="text-5xl md:text-7xl font-serif font-black tracking-tighter leading-none mb-2">{item.title}</h3>
+          <h3 className={`text-5xl md:text-7xl font-serif font-black tracking-tighter leading-none mb-2 ${item.id === 5 ? 'italic' : ''}`}>
+            {item.title}
+          </h3>
         </div>
         
         <button 

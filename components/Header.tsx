@@ -7,14 +7,15 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   const handleEnquire = () => {
-    // Attempt to open Tawk.to chat if available, otherwise scroll to contact
+    // 1. Landing: Scroll to the contact section
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // 2. Interaction: Attempt to open Tawk.to chat if available
     if ((window as any).Tawk_API && (window as any).Tawk_API.maximize) {
       (window as any).Tawk_API.maximize();
-    } else {
-      const element = document.getElementById('contact');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
     }
   };
 

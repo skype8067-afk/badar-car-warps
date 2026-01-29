@@ -8,11 +8,16 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
   const handleEnquire = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // 1. Landing: Scroll to the contact section
+    const contact = document.getElementById('contact');
+    if (contact) {
+      contact.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 2. Interaction: Attempt to open Tawk.to chat if available
     if ((window as any).Tawk_API && (window as any).Tawk_API.maximize) {
       (window as any).Tawk_API.maximize();
-    } else {
-      const contact = document.getElementById('contact');
-      if (contact) contact.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

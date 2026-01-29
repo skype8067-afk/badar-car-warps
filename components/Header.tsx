@@ -1,28 +1,11 @@
 
-import React, { useState, useEffect } from 'react';
-import { Maximize, Minimize } from 'lucide-react';
+import React from 'react';
 
 interface HeaderProps {
   scrolled: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({ scrolled }) => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-
-  const toggleFullScreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch((e) => {
-        console.error(`Error attempting to enable full-screen mode: ${e.message}`);
-      });
-      setIsFullscreen(true);
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-        setIsFullscreen(false);
-      }
-    }
-  };
-
   const handleEnquire = () => {
     // Attempt to open Tawk.to chat if available, otherwise scroll to contact
     if ((window as any).Tawk_API && (window as any).Tawk_API.maximize) {
@@ -41,14 +24,6 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  useEffect(() => {
-    const handleFsChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-    document.addEventListener('fullscreenchange', handleFsChange);
-    return () => document.removeEventListener('fullscreenchange', handleFsChange);
-  }, []);
 
   return (
     <header 
@@ -76,16 +51,8 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
 
         <div className="flex items-center gap-4">
           <button 
-            onClick={toggleFullScreen}
-            className="p-2 text-zinc-400 hover:text-white transition-colors border border-zinc-800 rounded-md bg-black/20"
-            title="Toggle Full Screen"
-          >
-            {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
-          </button>
-          
-          <button 
             onClick={handleEnquire}
-            className="bg-white text-black px-6 py-2 text-sm font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors"
+            className="bg-white text-black px-6 py-2 text-sm font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors shadow-lg shadow-white/5"
           >
             Enquire
           </button>

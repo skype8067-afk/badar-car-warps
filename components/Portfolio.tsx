@@ -5,7 +5,6 @@ import { WorkItem } from '../types.ts';
 import { Play, Grid, ArrowRight, X } from 'lucide-react';
 
 const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLightbox: (url: string) => void }) => {
-  // Fix: Added React import to resolve the 'React' namespace error
   const handleEnquire = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -20,7 +19,7 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
   return (
     <div 
       className={`group relative overflow-hidden bg-zinc-950 border border-zinc-900 transition-all duration-700 hover:border-zinc-700 ${
-        item.collageImages ? 'w-full min-h-[700px]' : 'w-full h-[600px] md:h-[800px]'
+        item.collageImages ? 'w-full min-h-[500px] md:min-h-[700px]' : 'w-full h-[600px] md:h-[800px]'
       }`}
     >
       {item.vimeoId ? (
@@ -44,23 +43,31 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent z-10"></div>
         </div>
       ) : item.collageImages ? (
-        /* Premium Framed Bento Gallery Showcase */
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 p-3 h-full min-h-[700px] bg-black">
+        /* Premium Responsive Gallery Showcase for Signature Collection */
+        <div className={`grid gap-3 p-3 h-full min-h-[500px] md:min-h-[700px] bg-black ${
+          item.collageImages.length === 1 ? 'grid-cols-1' : 
+          item.collageImages.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 
+          'grid-cols-2 md:grid-cols-4 lg:grid-cols-6'
+        }`}>
            {/* Main Showcase Frame */}
            <div 
-             className="col-span-2 row-span-2 lg:col-span-3 lg:row-span-2 relative overflow-hidden group/img border border-zinc-900 cursor-zoom-in"
+             className={`relative overflow-hidden group/img border border-zinc-900 cursor-zoom-in ${
+               item.collageImages.length > 2 ? 'col-span-2 row-span-2 lg:col-span-3 lg:row-span-2' : ''
+             }`}
              onClick={() => onOpenLightbox(item.collageImages![0])}
            >
               <img src={item.collageImages[0]} className="w-full h-full object-cover transition-all duration-1000 scale-100 group-hover/img:scale-110" alt="Main Showcase" />
               <div className="absolute inset-0 bg-black/20 group-hover/img:bg-transparent transition-all"></div>
            </div>
            
-           {/* Grid Detail Frames */}
+           {/* Grid Detail Frames (only if more than 1 image) */}
            {item.collageImages.slice(1).map((imgUrl, idx) => (
              <div 
                key={idx} 
-               className={`relative overflow-hidden group/img border border-zinc-900 aspect-square lg:aspect-auto cursor-zoom-in ${
-                 idx === 2 ? 'col-span-1 md:col-span-2' : idx === 5 ? 'md:col-span-2 lg:col-span-1' : ''
+               className={`relative overflow-hidden group/img border border-zinc-900 cursor-zoom-in ${
+                 item.collageImages!.length > 2 ? 
+                 (idx === 2 ? 'col-span-1 md:col-span-2' : idx === 5 ? 'md:col-span-2 lg:col-span-1' : 'aspect-square lg:aspect-auto') : 
+                 'h-full'
                }`}
                onClick={() => onOpenLightbox(imgUrl)}
              >

@@ -1,4 +1,3 @@
-
 import { Service, WorkItem, Feedback } from './types.ts';
 
 export const SERVICES: Service[] = [
@@ -60,6 +59,23 @@ export const SERVICES: Service[] = [
 
 export const PORTFOLIO: WorkItem[] = [
   { 
+    id: 5, 
+    title: 'The Signature Collection', 
+    category: 'Flagship Portfolio', 
+    image: 'https://i.postimg.cc/9fChR9vk/Gemini-Generated-Image-50au1950au1950au.png',
+    collageImages: [
+      'https://i.postimg.cc/9fChR9vk/Gemini-Generated-Image-50au1950au1950au.png',
+      'https://i.postimg.cc/rpMk04vf/Gemini-Generated-Image-6yfpeu6yfpeu6yfp.png',
+      'https://i.postimg.cc/5tbVYzZP/Gemini-Generated-Image-b1an6nb1an6nb1an.png',
+      'https://i.postimg.cc/Zq4SBN12/Gemini-Generated-Image-i5xdb6i5xdb6i5xd.png',
+      'https://i.postimg.cc/W4TvFZQx/Gemini-Generated-Image-kdve2kdve2kdve2k.png',
+      'https://i.postimg.cc/Zq4SBNGt/Gemini-Generated-Image-l6hg35l6hg35l6hg.png',
+      'https://i.postimg.cc/SKkh29BN/Gemini-Generated-Image-pzx9i4pzx9i4pzx9.png',
+      'https://i.postimg.cc/q7wd8Rr4/Gemini-Generated-Image-qkv2znqkv2znqkv2.png',
+      'https://i.postimg.cc/xd5SKCQq/Gemini-Generated-Image-xa56oixa56oixa56.png'
+    ]
+  },
+  { 
     id: 1, 
     title: 'Food Truck Vehicle Wrap Design', 
     category: 'Vehicle Wrap', 
@@ -79,27 +95,6 @@ export const PORTFOLIO: WorkItem[] = [
     category: 'Branding & Design', 
     image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800',
     vimeoId: '1159073763'
-  },
-  { 
-    id: 2, 
-    title: 'WoodyFix Rolling Brand Experience', 
-    category: 'Mobile Branding', 
-    image: 'https://images.unsplash.com/photo-1541462608143-67571c6738dd?auto=format&fit=crop&q=80&w=800',
-    vimeoId: '1159073251'
-  },
-  {
-    id: 5,
-    title: 'Signature Collection',
-    category: 'Fleet & Custom Wraps',
-    image: 'https://i.postimg.cc/v1NhyTTj/image.jpg',
-    collageImages: [
-      'https://i.postimg.cc/v1NhyTTj/image.jpg',
-      'https://i.postimg.cc/qh6Lvr6w/image.jpg',
-      'https://i.postimg.cc/S2Yrx4YT/image.jpg',
-      'https://i.postimg.cc/grvVSNVV/image.jpg',
-      'https://i.postimg.cc/054VN4rH/2wr.jpg',
-      'https://i.postimg.cc/CzpgYLnr/image.jpg'
-    ]
   }
 ];
 

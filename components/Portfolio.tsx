@@ -27,12 +27,15 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
         item.collageImages ? 'w-full min-h-[500px] md:min-h-[700px]' : 'w-full h-[600px] md:h-[800px]'
       }`}
     >
-      {item.vimeoId ? (
+      {item.vimeoId || item.streamableId ? (
         /* High-impact Video Showcase Frame */
         <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
           <iframe
-            key={item.vimeoId}
-            src={`https://player.vimeo.com/video/${item.vimeoId}?muted=1&autoplay=1&loop=1&background=1&autopause=0&playsinline=1&api=1&dnt=1&quality=1080p`}
+            key={item.vimeoId || item.streamableId}
+            src={item.streamableId 
+              ? `https://streamable.com/e/${item.streamableId}?autoplay=1&muted=1&loop=1&controls=0`
+              : `https://player.vimeo.com/video/${item.vimeoId}?muted=1&autoplay=1&loop=1&background=1&autopause=0&playsinline=1&api=1&dnt=1&quality=1080p`
+            }
             className="absolute w-full h-full border-none pointer-events-none"
             style={{
               width: '100%',
@@ -95,7 +98,7 @@ const PortfolioItem = memo(({ item, onOpenLightbox }: { item: WorkItem; onOpenLi
       <div className="absolute bottom-0 left-0 p-12 z-30 w-full flex flex-col md:flex-row md:items-end justify-between gap-6 pointer-events-none">
         <div className="max-w-2xl">
           <div className="flex items-center gap-3 mb-6">
-            {item.vimeoId ? (
+            {item.vimeoId || item.streamableId ? (
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white text-black shadow-xl">
                 <Play size={18} fill="currentColor" />
               </div>

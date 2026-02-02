@@ -2,9 +2,8 @@
 import React from 'react';
 
 const Hero: React.FC = () => {
-  // Using the requested Vimeo link ID for the background
-  const videoId = '1159068755';
-  const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&playsinline=1&dnt=1`;
+  // Using the requested Streamable link for the hero background
+  const embedUrl = `https://streamable.com/e/nn54yo?autoplay=1&muted=1&loop=1&controls=0`;
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -20,7 +19,7 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black z-10"></div>
         
-        {/* Vimeo Video Layer - Standard Background Embed */}
+        {/* Streamable Video Layer - Configured for Background Playback */}
         <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center">
           <iframe
             src={embedUrl}
@@ -34,7 +33,7 @@ const Hero: React.FC = () => {
               border: 'none'
             }}
             allow="autoplay; fullscreen"
-            title="Badar Hero Background"
+            title="Badar Hero Background Video"
           ></iframe>
         </div>
       </div>

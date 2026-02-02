@@ -12,6 +12,7 @@ export interface WorkItem {
   category: string;
   image: string;
   vimeoId?: string;
+  streamableId?: string;
   collageImages?: string[];
 }
 

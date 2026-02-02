@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter, Check, Loader2 } from 'lucide-react';
+import { Check, Loader2, Mail, Phone, MapPin } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -11,10 +11,6 @@ const Contact: React.FC = () => {
     service: 'Vehicle & Car Wraps',
     description: ''
   });
-
-  // Using the specific Vimeo ID provided by the user
-  const videoId = '1159091703';
-  const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&playsinline=1&dnt=1`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -65,95 +61,82 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden min-h-[900px] flex items-center bg-black">
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Overlays to ensure text stays sharp and readable */}
-        <div className="absolute inset-0 bg-black/50 z-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-10"></div>
-        
-        {/* Vimeo Video Layer */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center">
+    <section id="contact" className="relative py-32 overflow-hidden bg-black">
+      {/* Enhanced Visibility Video Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-70 overflow-hidden">
+        <div className="absolute inset-0 w-full h-full flex items-center justify-center">
           <iframe
-            src={embedUrl}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 contrast-125 pointer-events-none"
+            src="https://streamable.com/e/2knb6h?autoplay=1&muted=1&loop=1&controls=0"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 contrast-110"
             style={{
               width: '100vw',
               height: '56.25vw', // 16:9 Aspect Ratio
-              minHeight: '100vh',
+              minHeight: '120vh',
               minWidth: '177.77vh',
-              transform: 'translate(-50%, -50%) scale(1.2)',
-              border: 'none'
+              border: 'none',
+              transform: 'translate(-50%, -50%) scale(1.1)',
             }}
             allow="autoplay; fullscreen"
-            title="Badar Contact Background"
+            title="Contact Background Video"
           ></iframe>
         </div>
       </div>
+      
+      {/* Softer Gradient Overlay to allow video visibility at the top while keeping bottom text readable */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-[1]"></div>
 
-      <div className="container mx-auto px-6 relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div>
-            <div className="inline-block px-4 py-1 border border-white/20 rounded-full mb-6 bg-white/10 backdrop-blur-md">
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">Let's Connect</span>
-            </div>
-            <h2 className="text-5xl md:text-7xl font-serif font-black mb-10 leading-tight">
-              Start the <br />
-              <span className="text-zinc-500">Conversation.</span>
-            </h2>
-            
-            <div className="space-y-10">
-              <div className="flex items-start gap-6 group">
-                <div className="p-4 bg-white/10 border border-white/20 rounded-xl group-hover:bg-white group-hover:text-black transition-all duration-500 backdrop-blur-md">
-                  <MapPin size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2">Our Studio Location</h4>
-                  <p className="text-white text-lg font-medium leading-relaxed">
-                    123 Design District, Suite 500<br />
-                    Creative Hub, NY 10013
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6 group">
-                <div className="p-4 bg-white/10 border border-white/20 rounded-xl group-hover:bg-white group-hover:text-black transition-all duration-500 backdrop-blur-md">
-                  <Mail size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2">Email Our Team</h4>
-                  <p className="text-white text-2xl font-serif font-bold italic underline decoration-zinc-700 hover:decoration-white transition-all cursor-pointer">
-                    info@badarai.site
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6 group">
-                <div className="p-4 bg-white/10 border border-white/20 rounded-xl group-hover:bg-white group-hover:text-black transition-all duration-500 backdrop-blur-md">
-                  <Phone size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-2">Call Directly</h4>
-                  <p className="text-white text-2xl font-serif font-bold">+1 (555) 0123-4567</p>
-                </div>
-              </div>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+          
+          <div className="space-y-12">
+            <div>
+              <h2 className="text-5xl md:text-7xl font-serif font-black mb-8 leading-tight tracking-tighter">
+                Start the <br />
+                <span className="text-zinc-500">Conversation.</span>
+              </h2>
+              <p className="text-xl text-zinc-400 max-w-md leading-relaxed">
+                Whether you're looking for a fleet of vehicle wraps or a total brand overhaul, 
+                our team is ready to deliver the Badar standard of excellence.
+              </p>
             </div>
 
-            <div className="mt-16 pt-16 border-t border-white/20">
-              <h4 className="font-bold uppercase tracking-widest text-[10px] text-zinc-500 mb-6">Join our digital ecosystem</h4>
-              <div className="flex gap-4">
-                {[Instagram, Linkedin, Twitter].map((Icon, i) => (
-                  <button 
-                    key={i}
-                    className="p-4 bg-white/10 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-500 backdrop-blur-md"
-                  >
-                    <Icon size={18} />
-                  </button>
-                ))}
+            <div className="space-y-8">
+              <div className="flex items-start gap-6 group">
+                <div className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-white group-hover:border-zinc-500 transition-all">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black uppercase tracking-widest text-zinc-500 mb-1">Email Our Studio</h4>
+                  <p className="text-lg font-bold">info@badarai.site</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6 group">
+                <div className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-white group-hover:border-zinc-500 transition-all">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black uppercase tracking-widest text-zinc-500 mb-1">Direct Line</h4>
+                  <p className="text-lg font-bold">+1 (555) 000-BADAR</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6 group">
+                <div className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-white group-hover:border-zinc-500 transition-all">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black uppercase tracking-widest text-zinc-500 mb-1">Our Presence</h4>
+                  <p className="text-lg font-bold leading-relaxed">
+                    Flagship Studio & Production Hub<br />
+                    Premium Vehicle Branding Center
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-black/70 backdrop-blur-3xl p-8 md:p-14 border border-white/20 rounded-3xl shadow-2xl">
+          <div className="bg-zinc-950/80 backdrop-blur-xl p-8 md:p-14 border border-zinc-900 rounded-3xl shadow-2xl">
             {submitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-24 animate-in fade-in zoom-in duration-700">
                 <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-8 shadow-[0_0_50px_rgba(255,255,255,0.3)]">
@@ -180,7 +163,7 @@ const Contact: React.FC = () => {
                       value={formData.fullName}
                       onChange={handleChange}
                       type="text" 
-                      className="bg-transparent border-b border-white/30 py-3 text-white focus:outline-none focus:border-white transition-colors placeholder:text-zinc-700" 
+                      className="bg-transparent border-b border-zinc-800 py-3 text-white focus:outline-none focus:border-white transition-colors placeholder:text-zinc-700" 
                       placeholder="Enter your full name" 
                     />
                   </div>
@@ -192,7 +175,7 @@ const Contact: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       type="email" 
-                      className="bg-transparent border-b border-white/30 py-3 text-white focus:outline-none focus:border-white transition-colors placeholder:text-zinc-700" 
+                      className="bg-transparent border-b border-zinc-800 py-3 text-white focus:outline-none focus:border-white transition-colors placeholder:text-zinc-700" 
                       placeholder="email@example.com" 
                     />
                   </div>
@@ -204,7 +187,7 @@ const Contact: React.FC = () => {
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="bg-transparent border-b border-white/30 py-3 text-white focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer"
+                    className="bg-transparent border-b border-zinc-800 py-3 text-white focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer"
                   >
                     <option className="bg-zinc-900 text-white">Vehicle & Car Wraps</option>
                     <option className="bg-zinc-900 text-white">Storefront Signage & Shop Graphics</option>
@@ -221,7 +204,7 @@ const Contact: React.FC = () => {
                     name="description"
                     value={formData.description}
                     onChange={handleChange}
-                    className="bg-transparent border-b border-white/30 py-3 text-white focus:outline-none focus:border-white transition-colors min-h-[140px] resize-none placeholder:text-zinc-700" 
+                    className="bg-transparent border-b border-zinc-800 py-3 text-white focus:outline-none focus:border-white transition-colors min-h-[140px] resize-none placeholder:text-zinc-700" 
                     placeholder="Describe your project vision..."
                   ></textarea>
                 </div>
